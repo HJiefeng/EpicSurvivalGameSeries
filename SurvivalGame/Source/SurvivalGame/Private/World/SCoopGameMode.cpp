@@ -121,7 +121,7 @@ void ASCoopGameMode::OnNightEnded()
 				ASCharacter* MyPawn = Cast<ASCharacter>(MyController->GetPawn());
 				if (MyPawn && MyPawn->IsAlive())
 				{
-					ASPlayerState* PS = Cast<ASPlayerState>(MyController->PlayerState);
+					ASPlayerState* PS = MyController->GetPlayerState<ASPlayerState>();
 					if (PS)
 					{
 						PS->ScorePoints(ScoreNightSurvived);
@@ -162,7 +162,7 @@ void ASCoopGameMode::CheckMatchEnd()
 		ASCharacter* MyPawn = Cast<ASCharacter>(*It);
 		if (MyPawn && MyPawn->IsAlive())
 		{
-			ASPlayerState* PS = Cast<ASPlayerState>(MyPawn->PlayerState);
+			ASPlayerState* PS = MyPawn->GetPlayerState<ASPlayerState>();
 			if (PS)
 			{
 				if (!PS->bIsABot)

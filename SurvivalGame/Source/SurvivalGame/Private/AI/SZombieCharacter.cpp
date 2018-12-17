@@ -79,7 +79,7 @@ void ASZombieCharacter::BeginPlay()
 	BroadcastUpdateAudioLoop(bSensedTarget);
 
 	/* Assign a basic name to identify the bots in the HUD. */
-	ASPlayerState* PS = Cast<ASPlayerState>(PlayerState);
+	ASPlayerState* PS = GetPlayerState<ASPlayerState>();
 	if (PS)
 	{
 		PS->SetPlayerName("Bot");
@@ -177,8 +177,8 @@ void ASZombieCharacter::PerformMeleeStrike(AActor* HitActor)
 		ACharacter* OtherPawn = Cast<ACharacter>(HitActor);
 		if (OtherPawn)
 		{
-			ASPlayerState* MyPS = Cast<ASPlayerState>(PlayerState);
-			ASPlayerState* OtherPS = Cast<ASPlayerState>(OtherPawn->PlayerState);
+			ASPlayerState* MyPS = this->GetPlayerState<ASPlayerState>();
+			ASPlayerState* OtherPS = OtherPawn->GetPlayerState<ASPlayerState>();
 
 			if (MyPS && OtherPS)
 			{

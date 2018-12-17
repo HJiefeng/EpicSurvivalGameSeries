@@ -16,3 +16,4 @@ SurvivalGame/Releases
 *.target
 *.modules
 *.opendb
+DerivedDataCache
