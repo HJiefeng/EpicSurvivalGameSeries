@@ -45,6 +45,23 @@ private:
 	class USCarryObjectComponent* CarriedObjectComp;
 
 public:
+	int CurrMoveTime;
+	int CurrMoveDir;
+
+	UPROPERTY(EditAnywhere, Category = "AI")
+	float MoveInterval;
+
+	UPROPERTY(EditAnywhere, Category = "AI")
+	int MoveTime;
+
+	UPROPERTY(EditAnywhere, Category = "AI")
+	float MoveVal;
+
+	UPROPERTY(EditAnywhere, Category = "AI")
+	int AutoMove;
+
+	void RandomMove();
+
 
 	UFUNCTION(BlueprintCallable, Category = "AI")
 	float GetLastNoiseLoudness();

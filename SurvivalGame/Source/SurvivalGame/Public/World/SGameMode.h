@@ -31,6 +31,9 @@ protected:
 	virtual void OnNightEnded();
 
 	virtual void SpawnDefaultInventory(APawn* PlayerPawn);
+
+	/* Handles bot spawning (during nighttime) */
+	virtual void SpawnBotHandler();
 	
 	/**
 	* Make sure pawn properties are back to default
@@ -69,9 +72,6 @@ protected:
 
 	/* Handle for nightly bot spawning */
 	FTimerHandle TimerHandle_BotSpawns;
-
-	/* Handles bot spawning (during nighttime) */
-	void SpawnBotHandler();
 
 	/************************************************************************/
 	/* Player Spawning                                                      */

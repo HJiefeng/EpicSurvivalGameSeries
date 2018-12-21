@@ -17,4 +17,19 @@ class SURVIVALGAME_API ASOpenWorldGameMode : public ASGameMode
 	
 	/* Don't allow spectating of other players or bots */
 	virtual bool CanSpectate_Implementation(APlayerController* Viewer, APlayerState* ViewTarget) override;
+
+	virtual void SpawnBotHandler() override;
+
+	// 初始投放怪物数量
+	UPROPERTY(EditDefaultsOnly, Category = "Rules")
+	int DefaultBotNum;
+
+	// 怪物最大数量
+	UPROPERTY(EditDefaultsOnly, Category = "Rules")
+	int MaxBotNum;
+
+public:
+
+	UFUNCTION(BlueprintCallable)
+	void SpawnBots();
 };

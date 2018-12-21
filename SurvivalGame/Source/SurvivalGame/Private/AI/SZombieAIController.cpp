@@ -24,6 +24,8 @@ ASZombieAIController::ASZombieAIController(const class FObjectInitializer& Objec
 
 	/* Initializes PlayerState so we can assign a team index to AI */
 	bWantsPlayerState = true;
+
+	MoveTo();
 }
 
 

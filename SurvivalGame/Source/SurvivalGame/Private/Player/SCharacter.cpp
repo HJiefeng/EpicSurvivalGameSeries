@@ -49,10 +49,25 @@ ASCharacter::ASCharacter(const class FObjectInitializer& ObjectInitializer)
 	TargetingSpeedModifier = 0.5f;
 	SprintingSpeedModifier = 2.5f;
 
-	Health = 100;
+	// 血量
+	GConfig->GetFloat(
+		TEXT("/Script/Test"),
+		TEXT("Health"),
+		Health,
+		GGameIni
+	);
+
+	// 自动移动
+	GConfig->GetInt(
+		TEXT("/Script/Test"),
+		TEXT("AutoMove"),
+		AutoMove,
+		GGameIni
+	);
 
 	IncrementHungerAmount = 5.0f;
 	IncrementHungerInterval = 5.0f;
+	MoveInterval = 2.0f;
 	CriticalHungerThreshold = 90;
 	HungerDamagePerInterval = 1.0f;
 	MaxHunger = 100;
@@ -62,8 +77,43 @@ ASCharacter::ASCharacter(const class FObjectInitializer& ObjectInitializer)
 	WeaponAttachPoint = TEXT("WeaponSocket");
 	PelvisAttachPoint = TEXT("PelvisSocket");
 	SpineAttachPoint = TEXT("SpineSocket");
+
+	CurrMoveTime = 0;
+	CurrMoveDir = 0;
+
+	MoveTime = 50;
+	MoveVal = 10.0f;
+	MoveInterval = 1.0f;
 }
 
+void ASCharacter::RandomMove()
+{
+	CurrMoveTime += 1;
+	if (CurrMoveTime >= MoveTime)
+	{
+		CurrMoveTime = 0;
+		CurrMoveDir = (CurrMoveDir + 1) % 4;
+	}
+	switch (CurrMoveDir)
+	{
+	case 0:
+		GEngine->AddOnScreenDebugMessage(-1, 30.0f, FColor::Yellow, *FString::Printf(TEXT("RandomMoveForward")));
+		MoveForward(MoveVal);
+		break;
+	case 1:
+		GEngine->AddOnScreenDebugMessage(-1, 30.0f, FColor::Yellow, *FString::Printf(TEXT("RandomMoveRight")));
+		MoveRight(MoveVal);
+		break;
+	case 2:
+		GEngine->AddOnScreenDebugMessage(-1, 30.0f, FColor::Yellow, *FString::Printf(TEXT("RandomMoveBackward")));
+		MoveForward(-MoveVal);
+	case 3:
+		GEngine->AddOnScreenDebugMessage(-1, 30.0f, FColor::Yellow, *FString::Printf(TEXT("RandomMoveLeft")));
+		MoveRight(-MoveVal);
+	default:
+		break;
+	}
+}
 
 void ASCharacter::BeginPlay()
 {
@@ -114,6 +164,11 @@ void ASCharacter::Tick(float DeltaTime)
 				bHasNewFocus = false;
 			}
 		}
+	}
+	
+	if (AutoMove > 0)
+	{
+		RandomMove();
 	}
 }
 
