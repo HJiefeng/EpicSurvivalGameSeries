@@ -6,6 +6,7 @@
 #include "SCharacterMovementComponent.h"
 #include "SDamageType.h"
 
+#define UE_SERVER 1
 
 ASBaseCharacter::ASBaseCharacter(const class FObjectInitializer& ObjectInitializer)
 	/* Override the movement class from the base class to our own to support multiple speeds (eg. sprinting) */
