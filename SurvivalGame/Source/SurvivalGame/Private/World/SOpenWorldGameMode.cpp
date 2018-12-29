@@ -49,16 +49,19 @@ void ASOpenWorldGameMode::SpawnBotHandler()
 	if (!bSpawnZombiesAtNight)
 		return;
 
-	ASGameState* MyGameState = Cast<ASGameState>(GameState);
-	if (MyGameState)
+
+	if (GetWorld()->GetNumPawns() < MaxBotNum)
 	{
-		if (GetWorld()->GetNumPawns() < MaxBotNum)
-		{
-			SpawnNewBot();
-		}
+		SpawnNewBot();
 	}
 }
 
+
+void ASOpenWorldGameMode::StartMatch()
+{
+	Super::StartMatch();
+	SpawnBots();
+}
 
 void ASOpenWorldGameMode::SpawnBots()
 {

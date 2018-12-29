@@ -20,6 +20,8 @@ class SURVIVALGAME_API ASOpenWorldGameMode : public ASGameMode
 
 	virtual void SpawnBotHandler() override;
 
+	virtual void StartMatch() override;
+
 	// 初始投放怪物数量
 	UPROPERTY(EditDefaultsOnly, Category = "Rules")
 	int DefaultBotNum;

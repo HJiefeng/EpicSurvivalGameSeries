@@ -49,8 +49,8 @@ ASZombieCharacter::ASZombieCharacter(const class FObjectInitializer& ObjectIniti
 	AudioLoopComp->SetupAttachment(RootComponent);
 
 	Health = 100;
-	MeleeDamage = 24.0f;
-	MeleeStrikeCooldown = 1.0f;
+	MeleeDamage = 50.0f;
+	MeleeStrikeCooldown = 0.5f;
 	SprintingSpeedModifier = 3.0f;
 
 	/* By default we will not let the AI patrol, we can override this value per-instance. */
@@ -182,11 +182,12 @@ void ASZombieCharacter::PerformMeleeStrike(AActor* HitActor)
 
 			if (MyPS && OtherPS)
 			{
-				if (MyPS->GetTeamNumber() == OtherPS->GetTeamNumber())
-				{
-					/* Do not attack other zombies. */
-					return;
-				}
+				//if (MyPS->GetTeamNumber() == OtherPS->GetTeamNumber())
+				//{
+				//	/* Do not attack other zombies. */
+				//	return;
+				//}
+
 
 				/* Set to prevent a zombie to attack multiple times in a very short time */
 				LastMeleeAttackTime = GetWorld()->GetTimeSeconds();
